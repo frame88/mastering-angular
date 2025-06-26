@@ -1,48 +1,26 @@
 import { Component, signal } from '@angular/core';
-import { Chat } from '../components/chat';
-import { Bubble } from '../components/bubble';
+import { Picsum } from '../components/picsum';
 
-export type ChatItem = {
-  text: string;
-  button?: string;
-  variant?: 'primary' | 'secondary' | 'accent';
-  align?: 'start' | 'end';  
-}
 
 @Component({
   selector: 'app-play',
-  imports: [Bubble, Chat],
+  imports: [Picsum],
   template: `
-   <app-chat
-     [chat]="chat()"
-     (buttonItemClick)="doSomething($event)"
-   />  `,
+    <div class="max-w-screen-sm mx-6 sm:mx-auto">
+      <app-picsum
+        title="Image Preview"
+        width="600"
+        height="200"
+        
+      />
+      <app-picsum grayscale title="Image Preview" border />
+    </div>
+`,
   styles: ``
 })
 export class Play {
-
-  chat = signal<ChatItem[]>([
-    {
-      text: 'Hello World!',
-      button: 'CLICK'
-    },
-    {
-      text: 'Fine Thanks!',
-      variant: 'secondary',
-      align: 'end',
-    },
-    {
-      text: 'Great!',
-      variant: 'accent',
-      align: 'start',
-    }
-  ])
-  
-  doSomething(msg: string) {
-    console.log(msg);
-  }
 }
 
-
-// aggiornamento del capitolo 3 (il precedente)
-// con class e computed
+// creazione di un componente che permette di avere dei valori estetici o funzionali solo
+// scrivendo la direttiva accanto al tag del componente
+// utilizzo di coomputed, bolean attribute, numberattribute
