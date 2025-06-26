@@ -44,14 +44,5 @@ export class Play {
 }
 
 
-
-// questo commit applica quello che ho scritto precedentemente a un contesto piu dinamico e concreto
-// (oltre ad aggiungere la parte di stile con le variant che avevo volutmanete omesso)
-// tramite un array hardcoded, dopo aver definito un tipo, attribuisco dinamicamente ad ogni fumetto:
-// 1. funzione (onclick)
-// 2. stile
-// 3. allineamento fine o inizio riga
-// 4. testo
-
-//dopodiche definisco un altro componente "chat" anche lui dinamico, in cui importo il componente dinamico bubble
-// il parent child viene poi innestato all'interno del playground che gli passa i dati (l'array di chat)
+// aggiornamento del capitolo 3 (il precedente)
+// con class e computed

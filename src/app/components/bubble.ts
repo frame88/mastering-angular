@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -7,18 +7,11 @@ import { NgClass } from '@angular/common';
   template: `
     <div
       class="chat"
-      [ngClass]="{
-        'chat-start': align() === 'start' || !align(),
-        'chat-end': align() === 'end',
-      }"
+      [class]="clsAlign()"
     >
       <div
         class="chat-bubble chat-bubble-secondary"
-        [ngClass]="{
-          'chat-bubble-primary': variant() === 'primary' || !variant(),
-          'chat-bubble-secondary': variant() === 'secondary',
-          'chat-bubble-accent': variant() === 'accent',
-        }"
+        [class]="clsVariant()"
       >
         <ng-content>...</ng-content>
         @if(button()) {
@@ -31,9 +24,26 @@ import { NgClass } from '@angular/common';
   styles: ``
 })
 export class Bubble {
-align = input<'start' | 'end' | undefined>('start')
+  align = input<'start' | 'end' | undefined>('start')
   variant = input<'primary' | 'accent' | 'secondary' | undefined>('primary')
   button = input()
   buttonClick = output()
+
+  clsAlign = computed(() => this.align() === 'start'
+    ? 'chat-start'
+    : 'chat-end'
+  )
+
+  clsVariant = computed(() => {
+    switch(this.variant()) {
+      case 'accent':
+        return 'chat-bubble-accent'
+      case 'secondary':
+        return 'chat-bubble-secondary'
+      case 'primary':
+      default:
+        return 'chat-bubble-primary'
+    }
+  })
 }
 
