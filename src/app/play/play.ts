@@ -1,26 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { Picsum } from '../components/picsum';
+import { Picsum } from '../shared/picsum';
+import { Title } from '../shared/title';
 
 
 @Component({
   selector: 'app-play',
-  imports: [Picsum],
+  imports: [Picsum, Title],
   template: `
-    <div class="max-w-screen-sm mx-6 sm:mx-auto">
-      <app-picsum
-        title="Image Preview"
-        width="600"
-        height="200"
-        
-      />
-      <app-picsum grayscale title="Image Preview" border />
-    </div>
+    <app-title size="sm">Title SM</app-title>
+    <app-title size="md">Title MD</app-title>
+    <app-title size="xl" underlined>Title XL</app-title>
+    <app-title >Default (MD)</app-title>
 `,
   styles: ``
 })
 export class Play {
 }
 
-// creazione di un componente che permette di avere dei valori estetici o funzionali solo
-// scrivendo la direttiva accanto al tag del componente
-// utilizzo di coomputed, bolean attribute, numberattribute
+// creazione di un componente dinamico riferito alla tipografia
+// basta scrviere una direttiva ed assume uno stile diverso
+//c'è una variante che qui non è stata inclusa negli appunti del video
