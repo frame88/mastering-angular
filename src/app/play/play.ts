@@ -10,16 +10,20 @@ import { FxItem } from '../shared/fx-item';
   imports: [Picsum, Title, Fx, FxItem],
   template: `
     <app-fx gap="10" justify="end">
-      <app-fx-item>left</app-fx-item>
-      <app-fx-item class="bg-slate-400 text-black" grow>middle</app-fx-item>
-      <app-fx-item>right</app-fx-item>
+      <app-fx-item>start</app-fx-item>
+      <app-fx-item>center</app-fx-item>
+      <app-fx-item>end</app-fx-item>
     </app-fx>
+    
+    <!-- GENERAZIONE DI UN ERRORE VOLUTO, item è fuori dal -fx -->
+    <app-fx-item>Single</app-fx-item>
   `,
   styles: ``
 })
 export class Play {
 }
 
-// tramite questa rifinitura è possibile attribuire dei valori direttamente sul componente dinamico
-// host fa in modo che il valore passi dal padre al figlio
-// altrimenti il valore 'grow' non verrrebbe applicato
+// tremite questo esercizio viene mostrato come leggere i valori del parent
+// con dependency injection vengono letti i valori di gap e justify
+// viene consigliato di usarlo solo per leggere anziché scrivere nuovi dati, per non avere problemi nel lifecycle o di rendering
+// può essere utile per mostrare gli errori del componente, come fa lui.
