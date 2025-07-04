@@ -1,6 +1,8 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
+export type Variant = 'primary' | 'warning' | 'accent';
+
 @Component({
   selector: 'app-button',
   imports: [NgClass],
@@ -20,7 +22,7 @@ import { Component, computed, input } from '@angular/core';
   styles: ``
 })
 export class Button {
-  variant = input<'primary' | 'warning' | 'accent'>('primary')
+  variant = input<Variant>('primary')
   url = input<string>()
 
   targetValue = computed(() => {
