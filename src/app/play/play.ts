@@ -1,22 +1,36 @@
 import { Component, signal } from '@angular/core';
 import { Picsum } from '../shared/picsum';
 import { Title } from '../shared/title';
+import { Fx } from '../shared/fx';
 
 
 @Component({
   selector: 'app-play',
-  imports: [Picsum, Title],
+  imports: [Picsum, Title, Fx],
   template: `
-    <app-title size="sm">Title SM</app-title>
-    <app-title size="md">Title MD</app-title>
-    <app-title size="xl" underlined>Title XL</app-title>
-    <app-title >Default (MD)</app-title>
+    <app-fx [gap]="16" justify="between">
+      <div>left</div>
+      <div>middle</div>
+      <div>right</div>
+    </app-fx>
+
+    <app-fx [gap]="100" justify="end">
+      <div>left</div>
+      <div>middle</div>
+      <div>right</div>
+    </app-fx>
+
+    <app-fx justify="start">
+      <div>left</div>
+      <div>middle</div>
+      <div>right</div>
+    </app-fx>
 `,
   styles: ``
 })
 export class Play {
 }
 
-// creazione di un componente dinamico riferito alla tipografia
-// basta scrviere una direttiva ed assume uno stile diverso
-//c'è una variante che qui non è stata inclusa negli appunti del video
+// creazione di un componente dinamico riferito ai template
+// applicazione del justify e del gap
+// (non da chissà quale potere in più)
