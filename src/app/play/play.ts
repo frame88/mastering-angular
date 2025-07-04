@@ -3,27 +3,34 @@ import { Picsum } from '../shared/picsum';
 import { Title } from '../shared/title';
 import { Fx } from '../shared/fx';
 import { FxItem } from '../shared/fx-item';
+import { Button } from '../shared/button';
 
 
 @Component({
   selector: 'app-play',
-  imports: [Picsum, Title, Fx, FxItem],
+  imports: [Picsum, Title, Fx, FxItem, Button],
   template: `
-    <app-fx gap="10" justify="end">
-      <app-fx-item>start</app-fx-item>
-      <app-fx-item>center</app-fx-item>
-      <app-fx-item>end</app-fx-item>
-    </app-fx>
-    
-    <!-- GENERAZIONE DI UN ERRORE VOLUTO, item è fuori dal -fx -->
-    <app-fx-item>Single</app-fx-item>
+    <app-button
+      (click)="doSomething()"
+       variant="primary">primary</app-button>
+
+    <app-button
+      variant="warning"
+      url="/about">warning</app-button>
+
+    <app-button
+      url="https://www.learnbydo.ing"
+      variant="accent">
+      accent
+    </app-button>
   `,
   styles: ``
 })
 export class Play {
+  doSomething() {
+    window.alert('clicked')
+  }
 }
 
-// tremite questo esercizio viene mostrato come leggere i valori del parent
-// con dependency injection vengono letti i valori di gap e justify
-// viene consigliato di usarlo solo per leggere anziché scrivere nuovi dati, per non avere problemi nel lifecycle o di rendering
-// può essere utile per mostrare gli errori del componente, come fa lui.
+//in questo esempio viene mostrato come creare un componente button
+//con funzione, stile, url e target personalizzati
