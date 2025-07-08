@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, model, signal } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -27,8 +27,8 @@ import { Component, input, output, signal } from '@angular/core';
 export class Card {
   title = input<string>()
   icon = input<string>()
+  isOpen = model(false)
   iconClick = output()
-  isOpen = signal(false)
 
   toggle() {
     this.isOpen.update(prev => !prev)

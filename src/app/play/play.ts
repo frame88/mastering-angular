@@ -10,6 +10,7 @@ import { Card } from '../shared/card';
     <app-card
       title="My Profile"
       icon="❤️"
+      [(isOpen)]="openingState"
       (iconClick)="doSomething()"
     >
       lorem ipsum ...
@@ -18,6 +19,7 @@ import { Card } from '../shared/card';
   styles: ``
 })
 export class Play {
+  openingState = signal(false);
   doSomething() {
     console.log('Icon clicked!');
   }
@@ -25,3 +27,6 @@ export class Play {
 
 // un componente card
 // si espande al click (come un accordion)
+// nell'aspeto identico all'altro, ma tramite uno stop propagation impedisce
+// l'eventuale interferenza con altricomponenti
+// quali per esempio la sidebar del componente precedente
