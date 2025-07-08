@@ -1,20 +1,24 @@
 import { Component, signal } from '@angular/core';
 import { SidePanel } from '../shared/side-panel';
 import { Card } from '../shared/card';
+import { AnimatedCard } from '../shared/animated-card';
 
 
 @Component({
   selector: 'app-play',
-  imports: [Card],
+  imports: [AnimatedCard],
   template: `
-    <app-card
+    <app-animated-card
       title="My Profile"
       icon="❤️"
       [(isOpen)]="openingState"
       (iconClick)="doSomething()"
     >
-      lorem ipsum ...
-    </app-card>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
+    </app-animated-card>
   `,
   styles: ``
 })
