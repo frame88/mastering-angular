@@ -1,33 +1,27 @@
 import { Component, signal } from '@angular/core';
 import { SidePanel } from '../shared/side-panel';
+import { Card } from '../shared/card';
 
 
 @Component({
   selector: 'app-play',
-  imports: [SidePanel],
+  imports: [Card],
   template: `
-    <div class="flex justify-end">
-      <button (click)="isOpen.set(true)" class="btn">
-        OPEN PANEL
-      </button>
-    </div>
-
-    <app-side-panel
-    title="My Panel"
-    [(isOpen)]="isOpen"
+    <app-card
+      title="My Profile"
+      icon="❤️"
+      (iconClick)="doSomething()"
     >
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus architecto at aut mollitia, similique sit voluptatum? Aliquam quaerat repellendus temporibus ut vero. Atque culpa ea fugit laudantium repellat reprehenderit, sint?
-    </app-side-panel>
+      lorem ipsum ...
+    </app-card>
   `,
   styles: ``
 })
 export class Play {
-  isOpen = signal(false);
-
+  doSomething() {
+    console.log('Icon clicked!');
+  }
 }
 
-// in questo componente abbiamo un bottone che apre il side panel
-// tutto è ottimizzato tramite un computed che carica le classi css nell'host, solo quando il valore isOpen
-// è true. Al click gli vengono attribuite due classi Tail wind per il position fixed,
-// interessante è l'utilizzo di model che permette un binding direzionale e fa risparmiare una 
-//quantita di codice notevole
+// un componente card
+// si espande al click (come un accordion)
