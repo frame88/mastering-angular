@@ -1,50 +1,33 @@
 import { Component, signal } from '@angular/core';
-import { Picsum } from '../shared/picsum';
-import { Title } from '../shared/title';
-import { Fx } from '../shared/fx';
-import { FxItem } from '../shared/fx-item';
-import { Button } from '../shared/button';
-import { ButtonGroup } from '../shared/button-group';
-import { ArrayButton, ButtonArray } from '../shared/button-array';
+import { SidePanel } from '../shared/side-panel';
 
 
 @Component({
   selector: 'app-play',
-  imports: [Picsum, Title, Fx, FxItem, Button, ButtonGroup, ButtonArray],
+  imports: [SidePanel],
   template: `
-    <app-button-array 
-    wrap
-    borders
-    align="center"
-    [data]="buttons"
-    />
+    <div class="flex justify-end">
+      <button (click)="isOpen.set(true)" class="btn">
+        OPEN PANEL
+      </button>
+    </div>
+
+    <app-side-panel
+    title="My Panel"
+    [(isOpen)]="isOpen"
+    >
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus architecto at aut mollitia, similique sit voluptatum? Aliquam quaerat repellendus temporibus ut vero. Atque culpa ea fugit laudantium repellat reprehenderit, sint?
+    </app-side-panel>
   `,
   styles: ``
 })
 export class Play {
-  doSomething() {
-    window.alert('clicked')
-  }
+  isOpen = signal(false);
 
-  buttons: ArrayButton[] = [
-    {
-      label: 'About (internal)',
-      variant: 'primary',
-      url: '/about'
-    },
-    {
-      label: 'Another (internal)',
-      variant: 'primary',
-      url: '/about'
-    },
-    {
-      label: 'LearnByDoing (external)',
-      variant:'accent',
-      url: 'https://www.learnbydo.ing'
-    },
-  ]
 }
 
-// in questo esempio il gruppo di bottoni viene usato sempre tramite i due precedenti componenti
-// ma prendendo i dati da un array
-//sarebbe interessante creare un array json, importarlo nel componente e lavorare in questo modo
+// in questo componente abbiamo un bottone che apre il side panel
+// tutto è ottimizzato tramite un computed che carica le classi css nell'host, solo quando il valore isOpen
+// è true. Al click gli vengono attribuite due classi Tail wind per il position fixed,
+// interessante è l'utilizzo di model che permette un binding direzionale e fa risparmiare una 
+//quantita di codice notevole
