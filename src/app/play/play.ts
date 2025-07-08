@@ -25,8 +25,7 @@ export class Play {
   }
 }
 
-// un componente card
-// si espande al click (come un accordion)
-// nell'aspeto identico all'altro, ma tramite uno stop propagation impedisce
-// l'eventuale interferenza con altricomponenti
-// quali per esempio la sidebar del componente precedente
+// un componente card identico al precedente
+// ma che utilizza le animazioni bultin del framework, tramite
+// il bowseranimationsmodule innestato nell'app config
+// vengono definiti degli stati e il comportamento quche assumano quando sono attivi
