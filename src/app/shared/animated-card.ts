@@ -11,7 +11,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       })),
       state('closed', style({
         height: 0,
-        padding: 0
+        padding: 0,
+        paddingLeft: '0.75rem'
       })),
       transition('opened <=> closed', [
         animate('0.7s cubic-bezier(0.83, 0, 0.17, 1)')

@@ -1,24 +1,18 @@
 import { Component, signal } from '@angular/core';
-import { SidePanel } from '../shared/side-panel';
-import { Card } from '../shared/card';
-import { AnimatedCard } from '../shared/animated-card';
+import { ButtonArray } from '../shared/button-array';
+import { ArrayButton } from '../shared/button-array';
 
 
 @Component({
   selector: 'app-play',
-  imports: [AnimatedCard],
+  imports: [ButtonArray],
   template: `
-    <app-animated-card
-      title="My Profile"
-      icon="❤️"
-      [(isOpen)]="openingState"
-      (iconClick)="doSomething()"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem cum dolores fugit ipsam nobis provident. Aut error fugit iusto perferendis. Ab cupiditate doloremque enim impedit perspiciatis possimus quibusdam suscipit.
-    </app-animated-card>
+    <app-button-array
+      [data]="buttons"
+      wrap
+      borders
+      align="center"
+    />
   `,
   styles: ``
 })
@@ -27,9 +21,29 @@ export class Play {
   doSomething() {
     console.log('Icon clicked!');
   }
+
+  buttons: ArrayButton[] = [
+  {
+    label: 'Alert!',
+    variant: 'primary',
+    action: () => alert('Hai cliccato Alert!')
+  },
+  {
+    label: 'Vai a About',
+    variant: 'accent',
+    url: '/about'
+  },
+  {
+    label: 'Console Log',
+    variant: 'warning',
+    action: () => console.log('Button log!')
+  }
+];
+
 }
 
-// un componente card identico al precedente
-// ma che utilizza le animazioni bultin del framework, tramite
-// il bowseranimationsmodule innestato nell'app config
-// vengono definiti degli stati e il comportamento quche assumano quando sono attivi
+//rivisitazione del componente button-array e del relativo figlio button
+// in questo commit ho aggiunto la possiblita di mettere una funzione sul button all'interno di button array
+// questo era gia possibile facendolo onclick sull button ma non da array.
+// rimangono comunque dei vincoli legati alle arrow function, ma possono essere aggirati usando appunto
+// il componente button anziche il button array

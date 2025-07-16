@@ -3,8 +3,8 @@ import { Variant } from './button';
 
 export type ArrayButton = {
   label: string;
-  variant: Variant
-  url: string;
+  variant: Variant;
+  action?: () => void; 
 }
 import { Button } from './button';
 import { ButtonGroup } from './button-group';
@@ -22,7 +22,7 @@ import { ButtonGroup } from './button-group';
       @for(button of data(); track $index) {
         <app-button
           [variant]="button.variant"
-          [url]="button.url"
+          (click)="button.action ? button.action() : null"
         >{{button.label}}</app-button>
       }
     </app-button-group>  `,

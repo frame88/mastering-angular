@@ -7,17 +7,15 @@ export type Variant = 'primary' | 'warning' | 'accent';
   selector: 'app-button',
   imports: [NgClass],
   template: `
-    <a
-      class="btn"
-      [href]="url()"
-      [target]="targetValue()"
-      [ngClass]="{
-        'btn-primary': variant() === 'primary',
-        'btn-warning': variant() === 'warning',
-        'btn-accent': variant() === 'accent',
-      }">
-      <ng-content></ng-content>
-    </a>
+    <button 
+        class="btn"
+        [ngClass]="{
+          'btn-primary': variant() === 'primary',
+          'btn-warning': variant() === 'warning',
+          'btn-accent': variant() === 'accent',
+        }">
+        <ng-content></ng-content>
+    </button>
   `,
   styles: ``
 })
