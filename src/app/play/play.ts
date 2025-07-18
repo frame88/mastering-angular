@@ -1,49 +1,62 @@
 import { Component, signal } from '@angular/core';
-import { ButtonArray } from '../shared/button-array';
-import { ArrayButton } from '../shared/button-array';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, map } from 'rxjs';
+import { Weather } from '../shared/weather';
 
 
 @Component({
   selector: 'app-play',
-  imports: [ButtonArray],
+  imports: [
+    Weather,
+    ReactiveFormsModule
+  ],
   template: `
-    <app-button-array
-      [data]="buttons"
-      wrap
-      borders
-      align="center"
-    />
-  `,
+    <div class="flex flex-col gap-3">
+      <input
+        [formControl]="input"
+        type="text" placeholder="Search City" class="input input-bordered"
+      >
+
+      <app-weather [city]="value()"/>
+    </div>  
+    `,
   styles: ``
 })
 export class Play {
-  openingState = signal(false);
-  doSomething() {
-    console.log('Icon clicked!');
-  }
+  input = new FormControl<string>('', { nonNullable: true});
 
-  buttons: ArrayButton[] = [
-  {
-    label: 'Alert!',
-    variant: 'primary',
-    action: () => alert('Hai cliccato Alert!')
-  },
-  {
-    label: 'Vai a About',
-    variant: 'accent',
-    url: '/about'
-  },
-  {
-    label: 'Console Log',
-    variant: 'warning',
-    action: () => console.log('Button log!')
-  }
-];
+  // REACTIVE
+  value = toSignal(
+    this.input.valueChanges.pipe(
+      map(text => text.toLowerCase()),
+      debounceTime(1000)
+    ),
+    { initialValue: ''}
+  )
 
+  /*
+  // IMPERATIVE
+  value = signal<string>('')
+  constructor() {
+    this.input.valueChanges
+      .pipe(
+        map(text => text.toLowerCase()),
+        debounceTime(1000)
+      )
+      .subscribe(text => {
+        this.value.set(text)
+      })
+  }*/
 }
 
-//rivisitazione del componente button-array e del relativo figlio button
-// in questo commit ho aggiunto la possiblita di mettere una funzione sul button all'interno di button array
-// questo era gia possibile facendolo onclick sull button ma non da array.
-// rimangono comunque dei vincoli legati alle arrow function, ma possono essere aggirati usando appunto
-// il componente button anziche il button array
+// il componente weather si appoggia a un api esterna https://openweathermap.org/api
+// attraverso un input tipizzato per stringhe non null
+// si traforma l'observable ricevuto in un signal, poi trasforma il testo in minuscolo, attende che tra un
+// carattere e l altro sia passato almeno 1s, in questo modo non fa una richiesta per ogni carattere inserito, e dopodichè
+// passa il valore al componente Weather
+
+//il valore arriva nel componente tramite la variabile city che accetta valori in input
+// poi viene allegato alla get, e il valore restituito viene inserito in un signal meteo
+
+//nonostante ciò, questo approccio viene poi sconsigliato, dopo 20 minuti di video, per l'uso di effect
