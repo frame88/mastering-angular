@@ -1,7 +1,6 @@
 import { Element } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, viewChild } from '@angular/core';
-
-declare var L: any;
+import L from 'leaflet';
 
 @Component({
   selector: 'app-map',
