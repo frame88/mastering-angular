@@ -3,51 +3,23 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, map } from 'rxjs';
 import { Weather } from '../shared/weather';
+import { Title } from '../shared/title';
+import { Map } from '../components/map';
 
 
 @Component({
   selector: 'app-play',
   imports: [
-    Weather,
-    ReactiveFormsModule
+    ReactiveFormsModule, Map
   ],
   template: `
-    <div class="flex flex-col gap-3">
-      <input
-        [formControl]="input"
-        type="text" placeholder="Search City" class="input input-bordered"
-      >
-
-      <app-weather [city]="value()"/>
-    </div>  
-    `,
+    <app-map/>
+  `,
   styles: ``
 })
 export class Play {
   input = new FormControl<string>('', { nonNullable: true});
 
-  // REACTIVE
-  value = toSignal(
-    this.input.valueChanges.pipe(
-      map(text => text.toLowerCase()),
-      debounceTime(1000)
-    ),
-    { initialValue: ''}
-  )
-
-  /*
-  // IMPERATIVE
-  value = signal<string>('')
-  constructor() {
-    this.input.valueChanges
-      .pipe(
-        map(text => text.toLowerCase()),
-        debounceTime(1000)
-      )
-      .subscribe(text => {
-        this.value.set(text)
-      })
-  }*/
 }
 
 // il componente weather si appoggia a un api esterna https://openweathermap.org/api

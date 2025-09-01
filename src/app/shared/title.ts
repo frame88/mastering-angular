@@ -11,7 +11,7 @@ import { booleanAttribute, Component, input } from '@angular/core';
       'sizeXL': size() === 'xl',
       'underlined': underlined(),
     }">
-      <ng-content>...</ng-content>
+      <ng-content></ng-content>
     </h1>
   `,
   styles: `
