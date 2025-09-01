@@ -1,4 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Element } from '@angular/compiler';
+import { AfterViewInit, Component, ElementRef, viewChild } from '@angular/core';
 
 declare var L: any;
 
@@ -6,7 +7,12 @@ declare var L: any;
   selector: 'app-map',
   imports: [],
   template: `
-    <div id="map"></div>
+    <div id="map" #map></div>
+    <div>
+      <button class="btn btn-success">
+        lorem
+      </button>
+    </div>
   `,
   styles: `
     #map { height: 300px; }
@@ -14,8 +20,13 @@ declare var L: any;
 })
 export class Map implements AfterViewInit {
 
+  mapReference = viewChild.required<ElementRef>('map');
+
   ngAfterViewInit(): void {
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    console.log(this.mapReference);
+    
+
+    var map = L.map(this.mapReference().nativeElement).setView([51.505, -0.09], 13);
   
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

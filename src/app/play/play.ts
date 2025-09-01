@@ -14,6 +14,8 @@ import { Map } from '../components/map';
   ],
   template: `
     <app-map/>
+    <app-map/>
+    <app-map/>
   `,
   styles: ``
 })
